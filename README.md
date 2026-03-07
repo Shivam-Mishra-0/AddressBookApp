@@ -52,8 +52,24 @@
   - Added unit tests (`AddressBookServiceTest`) covering contact addition, automatic Address Book creation, and handling multiple contacts.
 ---
 
-- 🧩 **UC3 – Edit Existing Contact :**  
-  _Pending implementation._
+- 🧩 **UC3 – Edit Existing Contact :**
+  - Introduces the ability to update an existing contact in an Address Book through a REST API.
+  - Enables modification of stored contact details while preserving the contact identity within the Address Book.
+
+  **Purpose**
+  - Allow users to update contact information such as address, city, state, zip, phone number, and email.
+  - Provide a mechanism to locate a contact using first name and last name within a specific Address Book.
+
+  **Implementation**
+  - Added an `updateContact()` method in `AddressBookService` to locate a contact by `firstName` and `lastName` and update the contact details.
+  - Implemented a REST endpoint in `AddressBookController`:
+    ```
+    PUT /addressbooks/{bookName}/contacts
+    ```
+  - The endpoint accepts `firstName` and `lastName` as query parameters and updated contact data in the request body.
+  - Added unit tests to verify successful contact updates and handling of non-existing contacts or missing Address Books.
+
+---
 
 - 🧩 **UC4 – Delete Contact :**  
   _Pending implementation._
