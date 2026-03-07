@@ -78,4 +78,16 @@ public class AddressBook {
     	}
     	return false;
     }
+    
+    // Delete the records of a person by their FirstName
+    public boolean deleteContactByFirstName(String firstName) {
+        for(int i=0; i<contactList.size(); i++) {
+            Contact contact = contactList.get(i);
+            if(contact.getFirstName().equalsIgnoreCase(firstName)) {
+                contactList.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
 }
