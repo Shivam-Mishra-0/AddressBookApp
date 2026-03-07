@@ -1,4 +1,3 @@
-
 # 📒 AddressBookApp
 
 > A Spring Boot based Java application developed using Test-Driven Development (TDD) to progressively design and implement a digital Address Book system. The project emphasizes incremental development, layered architecture, and progressive feature expansion to build a scalable and maintainable contact management system.
