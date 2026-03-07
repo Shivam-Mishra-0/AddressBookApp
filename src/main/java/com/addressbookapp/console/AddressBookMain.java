@@ -4,7 +4,7 @@ package com.addressbookapp.console;
 import com.addressbookapp.model.Contact;
 import com.addressbookapp.service.AddressBook;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class AddressBookMain {
 
@@ -14,84 +14,83 @@ public class AddressBookMain {
 
         System.out.println("Welcome to Address Book Program");
 
-        // Add one contact first
-        System.out.println("Enter contact details to add:");
+        // Add first contact
+        System.out.println("Enter first contact details:");
 
         System.out.print("First Name: ");
-        String firstName = sc.nextLine();
+        String firstName1 = sc.nextLine();
 
         System.out.print("Last Name: ");
-        String lastName = sc.nextLine();
+        String lastName1 = sc.nextLine();
 
         System.out.print("Address: ");
-        String address = sc.nextLine();
+        String address1 = sc.nextLine();
 
         System.out.print("City: ");
-        String city = sc.nextLine();
+        String city1 = sc.nextLine();
 
         System.out.print("State: ");
-        String state = sc.nextLine();
+        String state1 = sc.nextLine();
 
         System.out.print("Zip: ");
-        String zip = sc.nextLine();
+        String zip1 = sc.nextLine();
 
         System.out.print("Phone Number: ");
-        String phoneNumber = sc.nextLine();
+        String phoneNumber1 = sc.nextLine();
 
         System.out.print("Email: ");
-        String email = sc.nextLine();
+        String email1 = sc.nextLine();
 
-        Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        addressBook.addContact(contact);
+        Contact contact1 = new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNumber1, email1);
+        addressBook.addContact(contact1);
 
-        System.out.println("\nCurrent Contacts:");
+        // Add second contact
+        System.out.println("\nEnter second contact details:");
+
+        System.out.print("First Name: ");
+        String firstName2 = sc.nextLine();
+
+        System.out.print("Last Name: ");
+        String lastName2 = sc.nextLine();
+
+        System.out.print("Address: ");
+        String address2 = sc.nextLine();
+
+        System.out.print("City: ");
+        String city2 = sc.nextLine();
+
+        System.out.print("State: ");
+        String state2 = sc.nextLine();
+
+        System.out.print("Zip: ");
+        String zip2 = sc.nextLine();
+
+        System.out.print("Phone Number: ");
+        String phoneNumber2 = sc.nextLine();
+
+        System.out.print("Email: ");
+        String email2 = sc.nextLine();
+
+        Contact contact2 = new Contact(firstName2, lastName2, address2, city2, state2, zip2, phoneNumber2, email2);
+        addressBook.addContact(contact2);
+
+        System.out.println("\nAll Contacts:");
         addressBook.displayContact();
 
-        // Edit contact by first name
-        System.out.print("\nEnter first name of contact to edit: ");
-        String nameToEdit = sc.nextLine();
+        // Delete by name
+        System.out.print("\nEnter first name of contact to delete: ");
+        String nameToDelete = sc.nextLine();
 
-        System.out.println("Enter new details:");
+        boolean isDeleted = addressBook.deleteContactByFirstName(nameToDelete);
 
-        System.out.print("New Last Name: ");
-        String newLastName = sc.nextLine();
-
-        System.out.print("New Address: ");
-        String newAddress = sc.nextLine();
-
-        System.out.print("New City: ");
-        String newCity = sc.nextLine();
-
-        System.out.print("New State: ");
-        String newState = sc.nextLine();
-
-        System.out.print("New Zip: ");
-        String newZip = sc.nextLine();
-
-        System.out.print("New Phone Number: ");
-        String newPhoneNumber = sc.nextLine();
-
-        System.out.print("New Email: ");
-        String newEmail = sc.nextLine();
-
-        boolean isEdited = addressBook.editContactByFirstName(
-                nameToEdit,
-                newLastName,
-                newAddress,
-                newCity,
-                newState,
-                newZip,
-                newPhoneNumber,
-                newEmail
-        );
-
-        if(isEdited) {
-            System.out.println("\nContact updated successfully.");
+        if(isDeleted) {
+            System.out.println("Contact deleted successfully.");
         }else {
-            System.out.println("\nContact not found.");
+            System.out.println("Contact not found.");
         }
 
-        System.out.println("\nUpdated Contacts:");
+        System.out.println("\nRemaining Contacts:");
         addressBook.displayContact();
+
     }
 }
