@@ -1,4 +1,3 @@
-
 # 📒 AddressBookApp
 
 > A Spring Boot based Java application developed using Test-Driven Development (TDD) to progressively design and implement a digital Address Book system. The project emphasizes incremental development, layered architecture, and progressive feature expansion to build a scalable and maintainable contact management system.
@@ -109,8 +108,25 @@
 
 ---
 
-- 🧩 **UC6 – Multiple Address Books :**  
-  _Pending implementation._
+- 🧩 **UC6 – Multiple AddressBooks :**
+  - Extends the system to support managing multiple Address Books simultaneously.
+  - Each Address Book is uniquely identified by a name and maintained independently.
+
+  **Purpose**
+  - Allow the system to organize contacts across multiple Address Books such as personal, work, or family.
+  - Ensure contacts are isolated within their respective Address Books.
+
+  **Implementation**
+  - Refactored the service layer to manage Address Books using a `Map<String, AddressBook>`.
+  - Implemented service methods to create new Address Books and retrieve existing ones.
+  - Added REST endpoints in `AddressBookController`:
+    ```
+    POST /addressbooks/{name}
+    GET /addressbooks
+    ```
+  - Added unit tests to verify creation of multiple Address Books, prevention of duplicate creation, and isolation of contacts between Address Books.
+
+---
 
 - 🧩 **UC7 – Search Person by City or State :**  
   _Pending implementation._
