@@ -52,11 +52,43 @@
   - Added unit tests (`AddressBookServiceTest`) covering contact addition, automatic Address Book creation, and handling multiple contacts.
 ---
 
-- 🧩 **UC3 – Edit Existing Contact :**  
-  _Pending implementation._
+- 🧩 **UC3 – Edit Existing Contact :**
+  - Introduces the ability to update an existing contact in an Address Book through a REST API.
+  - Enables modification of stored contact details while preserving the contact identity within the Address Book.
 
-- 🧩 **UC4 – Delete Contact :**  
-  _Pending implementation._
+  **Purpose**
+  - Allow users to update contact information such as address, city, state, zip, phone number, and email.
+  - Provide a mechanism to locate a contact using first name and last name within a specific Address Book.
+
+  **Implementation**
+  - Added an `updateContact()` method in `AddressBookService` to locate a contact by `firstName` and `lastName` and update the contact details.
+  - Implemented a REST endpoint in `AddressBookController`:
+    ```
+    PUT /addressbooks/{bookName}/contacts
+    ```
+  - The endpoint accepts `firstName` and `lastName` as query parameters and updated contact data in the request body.
+  - Added unit tests to verify successful contact updates and handling of non-existing contacts or missing Address Books.
+
+---
+
+- 🧩 **UC4 – Delete Contact :**
+  - Introduces the ability to remove an existing contact from an Address Book using a REST API.
+  - Enables management of stored contacts by allowing deletion based on contact identity.
+
+  **Purpose**
+  - Allow users to delete a contact from an Address Book using the person's first name and last name.
+  - Maintain accurate and up-to-date contact records within the system.
+
+  **Implementation**
+  - Implemented a `deleteContact()` method in `AddressBookService` to locate and remove a contact from the `List<Contact>` using `removeIf()`.
+  - Added a REST endpoint in `AddressBookController`:
+    ```
+    DELETE /addressbooks/{bookName}/contacts
+    ```
+  - The endpoint accepts `firstName` and `lastName` as query parameters to identify the contact to be deleted.
+  - Added unit tests verifying successful deletion, handling of non-existing contacts, and cases where the Address Book is not found.
+
+---
 
 - 🧩 **UC5 – Prevent Duplicate Entries :**  
   _Pending implementation._
