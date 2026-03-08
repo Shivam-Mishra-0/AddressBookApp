@@ -44,7 +44,7 @@
   - Implemented an `AddressBook` model that maintains a `List<Contact>` representing stored contacts.
   - Created `AddressBookService` to manage Address Books using a `Map<String, AddressBook>`.
   - Automatically creates an Address Book if it does not already exist.
-  - Implemented `AddressBookConsole` exposing the REST endpoint:
+  - Implemented `AddressBookMain` exposing the REST endpoint:
     ```
     POST /addressbooks/{name}/contacts
     ```
@@ -61,7 +61,7 @@
 
   **Implementation**
   - Added an `updateContact()` method in `AddressBookService` to locate a contact by `firstName` and `lastName` and update the contact details.
-  - Implemented a REST endpoint in `AddressBookConsole`:
+  - Implemented a REST endpoint in `AddressBookMain`:
     ```
     PUT /addressbooks/{bookName}/contacts
     ```
@@ -80,7 +80,7 @@
 
   **Implementation**
   - Implemented a `deleteContact()` method in `AddressBookService` to locate and remove a contact from the `List<Contact>` using `removeIf()`.
-  - Added a REST endpoint in `AddressBookConsole`:
+  - Added a REST endpoint in `AddressBookMain`:
     ```
     DELETE /addressbooks/{bookName}/contacts
     ```
@@ -100,7 +100,7 @@
   **Implementation**
   - Utilized `List<Contact>` inside the `AddressBook` model to maintain multiple contacts.
   - Implemented a `getContacts()` method in `AddressBookService` to retrieve all contacts for a given Address Book.
-  - Added a REST endpoint in `AddressBookConsole`:
+  - Added a REST endpoint in `AddressBookMain`:
     ```
     GET /addressbooks/{bookName}/contacts
     ```
@@ -119,7 +119,7 @@
   **Implementation**
   - Refactored the service layer to manage Address Books using a `Map<String, AddressBook>`.
   - Implemented service methods to create new Address Books and retrieve existing ones.
-  - Added REST endpoints in `AddressBookConsoler`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     POST /addressbooks/{name}
     GET /addressbooks
@@ -155,7 +155,7 @@
   **Implementation**
   - Implemented search functionality in `AddressBookService` using Java Streams.
   - Combined contacts from all Address Books and filtered them based on the specified city or state.
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     GET /addressbooks/search/city/{city}
     GET /addressbooks/search/state/{state}
@@ -178,7 +178,7 @@
     ```
     Map<String, List<Contact>>
     ```
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     GET /addressbooks/view/city
     GET /addressbooks/view/state
@@ -201,7 +201,7 @@
     ```
     Map<String, Long>
     ```
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     GET /addressbooks/count/city
     GET /addressbooks/count/state
@@ -220,7 +220,7 @@
 
   **Implementation**
   - Implemented sorting logic in `AddressBookService` using Java Streams and `Comparator.comparing()` based on the `firstName` field.
-  - Added a REST endpoint in `AddressBookConsole`:
+  - Added a REST endpoint in `AddressBookMain`:
     ```
     GET /addressbooks/{bookName}/sort/name
     ```
@@ -239,7 +239,7 @@
 
   **Implementation**
   - Implemented sorting logic in `AddressBookService` using Java Streams and `Comparator.comparing()` for the fields `city`, `state`, and `zip`.
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     GET /addressbooks/{bookName}/sort/city
     GET /addressbooks/{bookName}/sort/state
@@ -260,7 +260,7 @@
   **Implementation**
   - Created a utility class `AddressBookFileIO` to manage file operations using `BufferedWriter` and `BufferedReader`.
   - Implemented functionality to save contacts from an Address Book to a file and load contacts from a file into memory.
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     POST /addressbooks/{bookName}/save
     GET /addressbooks/load
@@ -280,7 +280,7 @@
   **Implementation**
   - Created a utility class `AddressBookCSVIO` to manage CSV operations using OpenCSV's `CSVReader` and `CSVWriter`.
   - Implemented functionality to save contacts from an Address Book to a CSV file and load contacts from a CSV file into memory.
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     POST /addressbooks/{bookName}/save-csv
     GET /addressbooks/load-csv
@@ -300,7 +300,7 @@
   **Implementation**
   - Created a utility class `AddressBookJSONIO` to handle JSON serialization and deserialization using the GSON library.
   - Implemented functionality to save contacts from an Address Book to a JSON file and load contacts from a JSON file into memory.
-  - Added REST endpoints in `AddressBookConsole`:
+  - Added REST endpoints in `AddressBookMain`:
     ```
     POST /addressbookapp/{bookName}/save-json
     GET /addressbookapp/load-json
@@ -309,8 +309,28 @@
 
 ---
 
-- 🧩 **UC16 – Read Contacts from CSV File :**  
-  _Pending implementation._
+- 🧩 **UC16 – Retrieve Contacts from Database & Storage Layer Refactor :**
+  - Introduces database integration to retrieve contacts using JDBC and refactors the storage design to support multiple persistence formats through a storage abstraction layer.
+
+  **Purpose**
+  - Enable retrieval of contacts stored in a relational database.
+  - Decouple storage logic from business logic to support multiple storage formats such as file, CSV, and JSON.
+
+  **Implementation**
+  - Externalized database configuration in `application.properties`, allowing Spring Boot to automatically configure a `DataSource`.
+  - Implemented a `DBConnection` to execute SQL queries and map database rows to `Contact` objects.
+  - Added a REST endpoint in `AddressBookMain`:
+    ```
+    GET /addressbooks/db/contacts
+    ````
+  - Introduced a storage abstraction using the `ContactStorage` interface defining common operations for saving and loading contacts.
+  - Implemented three storage strategies:
+    - `FileStorage` – Handles standard Java File IO operations.
+    - `CSVStorage` – Supports CSV persistence using the OpenCSV library.
+    - `JSONStorage` – Supports JSON serialization and deserialization using the Gson library.
+  - Added integration tests using `@SpringBootTest` to validate database connectivity and data retrieval.
+
+---
 
 - 🧩 **UC17 – Write Contacts to JSON File :**  
   _Pending implementation._
