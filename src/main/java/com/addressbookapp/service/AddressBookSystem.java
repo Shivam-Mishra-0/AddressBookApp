@@ -1,4 +1,3 @@
-
 package com.addressbookapp.service;
 
 import com.addressbookapp.model.Contact;
@@ -83,5 +82,24 @@ public class AddressBookSystem {
                 .stream()
                 .flatMap(addressBook -> addressBook.getContactList().stream())
                 .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
+    }
+    
+    public List<Contact> getAllContactsSortedByName() {
+
+        return addressBookMap.values()
+                .stream()
+                .flatMap(addressBook -> addressBook.getContactList().stream())
+                .sorted((c1, c2) -> {
+                    int firstNameCompare = c1.getFirstName()
+                            .compareToIgnoreCase(c2.getFirstName());
+
+                    if(firstNameCompare != 0) {
+                        return firstNameCompare;
+                    }
+
+                    return c1.getLastName()
+                            .compareToIgnoreCase(c2.getLastName());
+                })
+                .collect(Collectors.toList());
     }
 }
