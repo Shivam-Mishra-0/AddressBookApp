@@ -1,3 +1,4 @@
+
 # 📒 AddressBookApp
 
 > A Spring Boot based Java application developed using Test-Driven Development (TDD) to progressively design and implement a digital Address Book system. The project emphasizes incremental development, layered architecture, and progressive feature expansion to build a scalable and maintainable contact management system.
@@ -44,11 +45,11 @@
   - Implemented an `AddressBook` model that maintains a `List<Contact>` representing stored contacts.
   - Created `AddressBookService` to manage Address Books using a `Map<String, AddressBook>`.
   - Automatically creates an Address Book if it does not already exist.
-  - Implemented `AddressBookController` exposing the REST endpoint:
+  - Implemented `AddressBookConsole` exposing the REST endpoint:
     ```
     POST /addressbooks/{name}/contacts
     ```
-  - Added unit tests (`AddressBookServiceTest`) covering contact addition, automatic Address Book creation, and handling multiple contacts.
+  - Added unit tests (`ContactTest`) covering contact addition, automatic Address Book creation, and handling multiple contacts.
 ---
 
 - 🧩 **UC3 – Edit Existing Contact :**
@@ -61,7 +62,7 @@
 
   **Implementation**
   - Added an `updateContact()` method in `AddressBookService` to locate a contact by `firstName` and `lastName` and update the contact details.
-  - Implemented a REST endpoint in `AddressBookController`:
+  - Implemented a REST endpoint in `AddressBookConsole`:
     ```
     PUT /addressbooks/{bookName}/contacts
     ```
@@ -80,7 +81,7 @@
 
   **Implementation**
   - Implemented a `deleteContact()` method in `AddressBookService` to locate and remove a contact from the `List<Contact>` using `removeIf()`.
-  - Added a REST endpoint in `AddressBookController`:
+  - Added a REST endpoint in `AddressBookConsole`:
     ```
     DELETE /addressbooks/{bookName}/contacts
     ```
@@ -100,7 +101,7 @@
   **Implementation**
   - Utilized `List<Contact>` inside the `AddressBook` model to maintain multiple contacts.
   - Implemented a `getContacts()` method in `AddressBookService` to retrieve all contacts for a given Address Book.
-  - Added a REST endpoint in `AddressBookController`:
+  - Added a REST endpoint in `AddressBookConsole`:
     ```
     GET /addressbooks/{bookName}/contacts
     ```
@@ -119,7 +120,7 @@
   **Implementation**
   - Refactored the service layer to manage Address Books using a `Map<String, AddressBook>`.
   - Implemented service methods to create new Address Books and retrieve existing ones.
-  - Added REST endpoints in `AddressBookController`:
+  - Added REST endpoints in `AddressBookConsoler`:
     ```
     POST /addressbooks/{name}
     GET /addressbooks
@@ -155,7 +156,7 @@
   **Implementation**
   - Implemented search functionality in `AddressBookService` using Java Streams.
   - Combined contacts from all Address Books and filtered them based on the specified city or state.
-  - Added REST endpoints in `AddressBookController`:
+  - Added REST endpoints in `AddressBookConsole`:
     ```
     GET /addressbooks/search/city/{city}
     GET /addressbooks/search/state/{state}
@@ -178,7 +179,7 @@
     ```
     Map<String, List<Contact>>
     ```
-  - Added REST endpoints in `AddressBookController`:
+  - Added REST endpoints in `AddressBookConsole`:
     ```
     GET /addressbooks/view/city
     GET /addressbooks/view/state
@@ -201,7 +202,7 @@
     ```
     Map<String, Long>
     ```
-  - Added REST endpoints in `AddressBookController`:
+  - Added REST endpoints in `AddressBookConsole`:
     ```
     GET /addressbooks/count/city
     GET /addressbooks/count/state
@@ -220,7 +221,7 @@
 
   **Implementation**
   - Implemented sorting logic in `AddressBookService` using Java Streams and `Comparator.comparing()` based on the `firstName` field.
-  - Added a REST endpoint in `AddressBookController`:
+  - Added a REST endpoint in `AddressBookConsole`:
     ```
     GET /addressbooks/{bookName}/sort/name
     ```
@@ -229,8 +230,25 @@
 
 ---
 
-- 🧩 **UC12 – Write Address Book to File :**  
-  _Pending implementation._
+- 🧩 **UC12 – Sort Contacts by City, State, or Zip :**
+  - Extends the sorting capability to allow contacts to be ordered by city, state, or zip code within an Address Book.
+  - Provides flexible ways to organize contacts based on location attributes.
+
+  **Purpose**
+  - Allow users to view contacts sorted by city, state, or zip code.
+  - Improve organization and accessibility of contact information based on geographical attributes.
+
+  **Implementation**
+  - Implemented sorting logic in `AddressBookService` using Java Streams and `Comparator.comparing()` for the fields `city`, `state`, and `zip`.
+  - Added REST endpoints in `AddressBookConsole`:
+    ```
+    GET /addressbooks/{bookName}/sort/city
+    GET /addressbooks/{bookName}/sort/state
+    GET /addressbooks/{bookName}/sort/zip
+    ```
+  - Added unit tests to validate sorting functionality, including handling empty Address Books and single contact scenarios.
+
+---
 
 - 🧩 **UC13 – Read Address Book from File :**  
   _Pending implementation._
@@ -364,8 +382,7 @@ mvnw spring-boot:run
 │
 ├── 📄 .gitattributes
 ├── 🚫 .gitignore
-│
-├── 📜 LICENSE
+|
 └── 📘 README.md
 ```
 
@@ -392,7 +409,7 @@ mvnw spring-boot:run
 
 ### 👨‍💻 Author
 
-**Abhishek Puri Goswami**  
+**Shivam Mishra**  
 _Java developer focused on clean architecture, object-oriented programming, and incremental software development using Test-Driven Development._
 
 ---
