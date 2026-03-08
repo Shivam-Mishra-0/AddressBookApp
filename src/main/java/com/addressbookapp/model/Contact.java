@@ -1,6 +1,7 @@
 package com.addressbookapp.model;
 
 import java.util.Objects;
+import java.time.LocalDate;
 
 public class Contact {
 	private int id;
@@ -12,6 +13,8 @@ public class Contact {
     private String zip;
     private String phoneNumber;
     private String email;
+    
+    private LocalDate date_added;
 
     public Contact() {
     }
@@ -28,6 +31,9 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+    
+    public LocalDate getDateAdded() { return date_added; }
+    public void setDateAdded(LocalDate dateAdded) { this.date_added = dateAdded; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
