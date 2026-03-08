@@ -128,8 +128,21 @@
 
 ---
 
-- 🧩 **UC7 – Search Person by City or State :**  
-  _Pending implementation._
+- 🧩 **UC7 – Prevent Duplicate Contacts :**
+  - Enhances the Address Book system by preventing duplicate contact entries within the same Address Book.
+  - Ensures that each contact is uniquely identified by their first name and last name.
+
+  **Purpose**
+  - Maintain data integrity by avoiding duplicate contact records.
+  - Ensure that the same person cannot be added multiple times within a single Address Book.
+
+  **Implementation**
+  - Added validation logic in `AddressBookService` to check existing contacts before adding a new entry.
+  - Implemented duplicate detection using Java Streams with `anyMatch()` to verify whether a contact with the same `firstName` and `lastName` already exists.
+  - Throws an exception if a duplicate contact is detected, preventing the entry from being added.
+  - Added unit tests to verify duplicate detection, successful addition of unique contacts, and allowing identical contacts in different Address Books.
+
+---
 
 - 🧩 **UC8 – View Persons by City or State :**  
   _Pending implementation._
