@@ -1,0 +1,13 @@
+[
+  {
+    "id": 0,
+    "firstName": "shivam",
+    "lastName": "mishra",
+    "address": "patel nagar",
+    "city": "bhopal",
+    "state": "m.p",
+    "zip": "462022",
+    "phoneNumber": "9301724250",
+    "email": "shivam@gmail.com"
+  }
+]
