@@ -448,8 +448,26 @@
 
 ---
 
-- 🧩 **UC22 – Measure Thread Pool Performance :**  
-  _Pending implementation._
+- 🧩 **UC22 – Read Contacts from JSON Server using REST Assured :**
+  - Enhances the AddressBook system to retrieve contact records from an external JSON server using REST API calls executed through automated tests.
+
+  **Purpose**
+  - Enable the application to integrate with an external REST service providing contact data.
+  - Demonstrate REST API testing using the REST Assured library.
+
+  **Implementation**
+  - Installed and configured **json-server** to simulate a REST API using a `db.json` file containing sample contact records.
+  - Started the JSON server on **port 3000**, exposing REST endpoints such as:
+    ```
+    GET /contacts
+    ```
+  - Added the **REST Assured dependency** to the project to perform HTTP requests within JUnit tests.
+  - Implemented a test case that sends a **GET request** to the JSON server endpoint and validates the response status code and returned contact data.
+
+  **Outcome**
+  - The AddressBook system can now retrieve contact data from an external JSON server using REST API calls executed from automated tests, enabling integration testing of external REST services.
+
+---
 
 - 🧩 **UC23 – Store Address Book in Database :**  
   _Pending implementation._
