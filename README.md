@@ -332,8 +332,27 @@
 
 ---
 
-- 🧩 **UC17 – Write Contacts to JSON File :**  
-  _Pending implementation._
+- 🧩 **UC17 – Update Contact Information in Database :**
+  - Extends the database integration to support updating existing contact information stored in the database.
+  - Enables modification of contact details through JDBC update operations.
+
+  **Purpose**
+  - Allow the system to update stored contact records in the database.
+  - Provide a mechanism to modify specific contact attributes such as city based on the person’s name.
+
+  **Implementation**
+  - Extended the `ContactRepository` to execute an SQL `UPDATE` query using JDBC `PreparedStatement`.
+  - Implemented logic to update the city of a contact identified by the person's name.
+  - Added a REST endpoint in `AddressBookController`:
+    ```
+    PUT /addressbooks/db/update-city
+    ```
+  - Added integration tests to verify successful database updates and ensure correct JDBC interaction.
+
+  **Outcome**
+  - The AddressBook system can now update existing contact records directly in the database using JDBC update operations.
+
+---
 
 - 🧩 **UC18 – Read Contacts from JSON File :**  
   _Pending implementation._
