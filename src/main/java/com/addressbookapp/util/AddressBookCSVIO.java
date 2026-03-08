@@ -1,13 +1,13 @@
 package com.addressbookapp.util;
 
+import com.addressbookapp.model.Contact;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
-import com.addressbookapp.model.Contact;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
 
 public class AddressBookCSVIO {
 
