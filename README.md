@@ -341,7 +341,7 @@
   - Provide a mechanism to modify specific contact attributes such as city based on the person’s name.
 
   **Implementation**
-  - Extended the `ContactRepository` to execute an SQL `UPDATE` query using JDBC `PreparedStatement`.
+  - Extended the `DBConnection` to execute an SQL `UPDATE` query using JDBC `PreparedStatement`.
   - Implemented logic to update the city of a contact identified by the person's name.
   - Added a REST endpoint in `AddressBookController`:
     ```
@@ -354,8 +354,27 @@
 
 ---
 
-- 🧩 **UC18 – Read Contacts from JSON File :**  
-  _Pending implementation._
+- 🧩 **UC18 – Retrieve Contacts by Date Range :**
+  - Enhances database querying capabilities to retrieve contacts created within a specified date range.
+  - Enables filtering of contact records based on their creation timestamp.
+
+  **Purpose**
+  - Allow users to fetch contacts added to the Address Book during a specific time period.
+  - Provide date-based filtering for better data analysis and retrieval.
+
+  **Implementation**
+  - Added a `date_added` column in the database to track when contacts are created.
+  - Extended `DBConnection` to execute a JDBC query using `PreparedStatement` that retrieves contacts whose `date_added` values fall between two given dates.
+  - Added a REST endpoint in `AddressBookMain`:
+    ```
+    GET /addressbooks/db/contacts-by-date
+    ```
+  - Added unit tests to validate correct database filtering and retrieval of contacts within the specified date range.
+  
+  **Outcome**
+  - The AddressBook system can now retrieve contacts from the database based on a given date range using JDBC queries.
+
+---
 
 - 🧩 **UC19 – Add Contacts Using Threads :**  
   _Pending implementation._
