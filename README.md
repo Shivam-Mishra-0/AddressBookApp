@@ -469,8 +469,27 @@
 
 ---
 
-- 🧩 **UC23 – Store Address Book in Database :**  
-  _Pending implementation._
+- 🧩 **UC23 – Add Contacts to JSON Server using REST Assured :**
+  - Enhances the AddressBook system to support adding new contact records to an external JSON server through REST API calls executed from automated tests.
+
+  **Purpose**
+  - Enable the system to create new contact entries in a REST-based data source.
+  - Demonstrate how REST Assured can be used to send POST requests and validate responses.
+
+  **Implementation**
+  - Used the **json-server** mock REST API running on **port 3000** with a `db.json` file storing contact records.
+  - Implemented a REST Assured test that sends a **POST request** to:
+    ```
+    POST /contacts
+    ```
+  - Sent contact data in JSON format using `contentType("application/json")` and a request body.
+  - Verified the server response using HTTP status **201 Created** and validated the returned JSON response.
+
+  **Outcome**
+  - The AddressBook system can now add new contact records to an external JSON server through REST API calls executed from automated tests, enabling verification of contact creation functionality.
+
+---
+
 
 - 🧩 **UC24 – Retrieve Contacts from Database :**  
   _Pending implementation._
