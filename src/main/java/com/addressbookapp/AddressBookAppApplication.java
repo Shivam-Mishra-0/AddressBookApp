@@ -12,7 +12,7 @@ public class AddressBookAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AddressBookAppApplication.class, args);
 
-// You can temporarily test(feature/uc-02-add-contact-console) it inside AddressBookApplication:
+// You can temporarily test(feature/UC-02-add-contact-console) it inside AddressBookApplication:
 //
 //		Contact contact = new Contact(
 //		        "Shivam",
