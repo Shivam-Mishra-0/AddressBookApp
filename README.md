@@ -404,8 +404,27 @@
 
 ---
 
-- 🧩 **UC20 – Measure Time for Threaded Contact Addition :**  
-  _Pending implementation._
+- 🧩 **UC20 – Add Contact to Database Using JDBC :**
+  - Enhances the AddressBook system to support inserting new contact records directly into the database using JDBC.
+
+  **Purpose**
+  - Allow the application to persist newly created contacts in the database.
+  - Ensure reliable and secure database insertion with proper transaction handling.
+
+  **Implementation**
+  - Extended `DBConnection` with an SQL `INSERT` query implemented using JDBC `PreparedStatement`.
+  - Implemented transaction management using `setAutoCommit(false)`, `commit()`, and `rollback()` to ensure database consistency.
+  - Added a service method in `AddressBookDBService` to handle contact insertion through the repository layer.
+  - Added a REST endpoint in `AddressBookMain`:
+  ```
+  POST /addressbooks/db/add-contact
+  ```
+  - Added unit tests to verify successful database insertion and correct interaction with the repository layer.
+
+  **Outcome**
+  - The AddressBook system can now insert new contact records into the database using JDBC with proper transaction management and layered architecture support.
+
+---
 
 - 🧩 **UC21 – Add Multiple Contacts Using Thread Pools :**  
   _Pending implementation._
