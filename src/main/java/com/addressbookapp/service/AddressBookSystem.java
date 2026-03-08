@@ -1,3 +1,4 @@
+
 package com.addressbookapp.service;
 
 import com.addressbookapp.model.Contact;
@@ -133,6 +134,13 @@ public class AddressBookSystem {
                 .stream()
                 .flatMap(book -> book.getContactList().stream())
                 .sorted(Comparator.comparing(Contact::getZip))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Contact> getAllContacts() {
+        return addressBookMap.values()
+                .stream()
+                .flatMap(addressBook -> addressBook.getContactList().stream())
                 .collect(Collectors.toList());
     }
 }
