@@ -250,8 +250,25 @@
 
 ---
 
-- 🧩 **UC13 – Read Address Book from File :**  
-  _Pending implementation._
+- 🧩 **UC13 – File IO Support :**
+  - Introduces file persistence for Address Book contacts using Java File IO.
+  - Enables saving contacts to a file and loading them back into memory.
+
+  **Purpose**
+  - Allow the Address Book data to be stored permanently outside application memory.
+  - Enable restoring contacts from a saved file when required.
+
+  **Implementation**
+  - Created a utility class `FileUtil` to manage file operations using `BufferedWriter` and `BufferedReader`.
+  - Implemented functionality to save contacts from an Address Book to a file and load contacts from a file into memory.
+  - Added REST endpoints in `AddressBookConsole`:
+    ```
+    POST /addressbooks/{bookName}/save
+    GET /addressbooks/load
+    ```
+  - Added unit tests to validate file creation, file reading, handling of empty files, and persistence of multiple contacts.
+
+---
 
 - 🧩 **UC14 – Count Contacts in File :**  
   _Pending implementation._
