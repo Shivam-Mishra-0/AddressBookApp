@@ -1,4 +1,3 @@
-
 # 📒 AddressBookApp
 
 > A Spring Boot based Java application developed using Test-Driven Development (TDD) to progressively design and implement a digital Address Book system. The project emphasizes incremental development, layered architecture, and progressive feature expansion to build a scalable and maintainable contact management system.
@@ -259,7 +258,7 @@
   - Enable restoring contacts from a saved file when required.
 
   **Implementation**
-  - Created a utility class `FileUtil` to manage file operations using `BufferedWriter` and `BufferedReader`.
+  - Created a utility class `AddressBookFileIO` to manage file operations using `BufferedWriter` and `BufferedReader`.
   - Implemented functionality to save contacts from an Address Book to a file and load contacts from a file into memory.
   - Added REST endpoints in `AddressBookConsole`:
     ```
@@ -270,8 +269,25 @@
 
 ---
 
-- 🧩 **UC14 – Count Contacts in File :**  
-  _Pending implementation._
+- 🧩 **UC14 – CSV File Support :**
+  - Introduces structured CSV-based persistence for Address Book contacts using the OpenCSV library.
+  - Enables exporting contacts to CSV files and loading them back into the system.
+
+  **Purpose**
+  - Allow contacts to be stored and retrieved using a structured CSV file format.
+  - Provide a standardized and portable format for contact data storage.
+
+  **Implementation**
+  - Created a utility class `AddressBookCSVIO` to manage CSV operations using OpenCSV's `CSVReader` and `CSVWriter`.
+  - Implemented functionality to save contacts from an Address Book to a CSV file and load contacts from a CSV file into memory.
+  - Added REST endpoints in `AddressBookConsole`:
+    ```
+    POST /addressbooks/{bookName}/save-csv
+    GET /addressbooks/load-csv
+    ```
+  - Added unit tests to validate CSV file creation, reading contacts from CSV, handling multiple contacts, and empty CSV file scenarios.
+
+---
 
 - 🧩 **UC15 – Write Contacts to CSV File :**  
   _Pending implementation._
