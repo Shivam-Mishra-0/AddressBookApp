@@ -1,8 +1,8 @@
-
 package com.addressbookapp.console;
 
 import com.addressbookapp.model.Contact;
 import com.addressbookapp.service.AddressBook;
+import com.addressbookapp.service.AddressBookSystem;
 
 import java.util.*;
 
@@ -10,22 +10,55 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        AddressBook addressBook = new AddressBook();
+        AddressBookSystem addressBookSystem = new AddressBookSystem();
 
         System.out.println("Welcome to Address Book Program");
 
         String choice;
 
         do{
-            Contact contact = readContact(sc);
-            addressBook.addContact(contact);
+            System.out.print("\nEnter Address Book Name: ");
+            String addressBookName = sc.nextLine();
 
-            System.out.print("Do you want to add another contact? (yes/no): ");
+            boolean isAdded = addressBookSystem.addAddressBook(addressBookName);
+
+            if(!isAdded) {
+                System.out.println("Address Book with this name already exists.");
+            }else {
+                System.out.println("Address Book added successfully.");
+            }
+
+            AddressBook addressBook = addressBookSystem.getAddressBook(addressBookName);
+
+            String addContactChoice;
+            do{
+                Contact contact = readContact(sc);
+
+                boolean isContactAdded = addressBook.addContact(contact);
+
+                if(isContactAdded) {
+                    System.out.println("Contact added successfully.");
+                }else {
+                    System.out.println("Duplicate contact found. Contact not added.");
+                }
+
+                System.out.print("Do you want to add another contact to " + addressBookName + "? (yes/no): ");
+                addContactChoice = sc.nextLine();
+
+            } while(addContactChoice.equalsIgnoreCase("yes"));
+
+            System.out.print("Do you want to add another Address Book? (yes/no): ");
             choice = sc.nextLine();
 
         } while(choice.equalsIgnoreCase("yes"));
 
-        addressBook.displayContact();
+        System.out.println("\nContacts in each Address Book:");
+        for(String name : addressBookSystem.getAddressBookMap().keySet()) {
+            System.out.println("\nAddress Book: " + name);
+            addressBookSystem.getAddressBook(name).displayContact();
+        }
+
+        sc.close();
     }
 
     private static Contact readContact(Scanner sc) {
