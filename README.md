@@ -376,8 +376,33 @@
 
 ---
 
-- 🧩 **UC19 – Add Contacts Using Threads :**  
-  _Pending implementation._
+---
+
+- 🧩 **UC19 – Retrieve Contact Counts by City or State from Database :**
+  - Enhances the AddressBook system to retrieve and compute the number of contacts stored in the database grouped by city and state, while introducing DTO-based data transfer for API responses.
+
+  **Purpose**
+  - Allow the application to analyze contact distribution based on geographic locations.
+  - Provide aggregated statistics showing how many contacts belong to each city or state.
+  - Improve API design by using DTO objects instead of exposing internal domain models.
+
+  **Implementation**
+  - Reused the existing JDBC database connectivity and `DBConnection` to retrieve contacts from the database.
+  - Implemented grouping and counting logic in the service layer using Java Streams with `groupingBy()` and `counting()`.
+  - Added REST endpoints in `AddressBookMain`:
+  ```
+  GET /addressbooks/db/count/city
+  GET /addressbooks/db/count/state
+  ```
+  - Introduced `ContactDTO` to represent API request and response data.
+  - Updated controller methods to return DTO objects while the service layer handles conversion between DTOs and model entities.
+  - Added unit tests to validate correct grouping, counting, and DTO-based responses.
+
+  **Outcome**
+  - The AddressBook system can now compute and display the number of contacts stored in the database for each city or state.
+  - The API now uses a DTO layer, improving separation between external API data and internal domain models.
+
+---
 
 - 🧩 **UC20 – Measure Time for Threaded Contact Addition :**  
   _Pending implementation._
