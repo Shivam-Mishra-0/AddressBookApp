@@ -1,5 +1,6 @@
 package com.addressbookapp.console;
 
+import java.util.*;
 import com.addressbookapp.model.Contact;
 import com.addressbookapp.service.AddressBook;
 import com.addressbookapp.service.AddressBookDBService;
@@ -8,6 +9,7 @@ import com.addressbookapp.util.AddressBookFileIO;
 import com.addressbookapp.util.AddressBookCSVIO;
 import com.addressbookapp.util.AddressBookJSONIO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -104,14 +106,48 @@ public class AddressBookMain {
         jsonIO.writeContactsToJSON(jsonFile, addressBookSystem.getAllContacts());
         jsonIO.readContactsFromJSON(jsonFile);
         
-        // JDBC -> (uc-16)
+        // JDBC -> (uc-21)
         AddressBookDBService dbService = new AddressBookDBService();
-        List<Contact> dbContacts = dbService.getAllContactsFromDB();
+        List<Contact> contactList = new ArrayList<>();
 
-        System.out.println("\nContacts Retrieved From Database:");
-        for (Contact contact : dbContacts) {
-            System.out.println(contact);
-        }
+        Contact c1 = new Contact();
+        c1.setFirstName("Rohit");
+        c1.setLastName("Sharma");
+        c1.setAddress("Arera Colony");
+        c1.setCity("Bhopal");
+        c1.setState("MP");
+        c1.setZip("462016");
+        c1.setPhoneNumber("9991112222");
+        c1.setEmail("rohit@gmail.com");
+        c1.setDateAdded(java.time.LocalDate.now());
+
+        Contact c2 = new Contact();
+        c2.setFirstName("Neha");
+        c2.setLastName("Patel");
+        c2.setAddress("Vijay Nagar");
+        c2.setCity("Indore");
+        c2.setState("MP");
+        c2.setZip("452010");
+        c2.setPhoneNumber("8882223333");
+        c2.setEmail("neha@gmail.com");
+        c2.setDateAdded(java.time.LocalDate.now());
+
+        Contact c3 = new Contact();
+        c3.setFirstName("Sneha");
+        c3.setLastName("Joshi");
+        c3.setAddress("Shivaji Nagar");
+        c3.setCity("Pune");
+        c3.setState("MH");
+        c3.setZip("411001");
+        c3.setPhoneNumber("7773334444");
+        c3.setEmail("sneha@gmail.com");
+        c3.setDateAdded(java.time.LocalDate.now());
+
+        contactList.add(c1);
+        contactList.add(c2);
+        contactList.add(c3);
+
+        dbService.addMultipleContactsToDatabase("ThreadBook", contactList);
     }
 
     private static Contact readContact(Scanner sc) {
